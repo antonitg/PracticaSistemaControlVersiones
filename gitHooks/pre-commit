@@ -1,0 +1,34 @@
+#!/bin/sh
+errToShow="ERROR caracters especials a borrar: "
+errEslint="ERROR error detectat de eslint: "
+toCommit=true
+charsToLook="á â à é è ê í ì î ó ò ô ú ù û"
+
+filesToLook=`git diff --cached --name-only --diff-filter=ACM`
+for f in $filesToLook
+do
+	for i in $charsToLook
+	do
+		isZero=`cat $f | grep $i | wc -c`
+		if [ "$isZero" != "0" ]
+		then
+			errToShow=$errToShow'char -> '$i" al fitxer -> "$f" " 
+			toCommit=false
+		fi
+	done
+done
+eslinthtml=`eslint --plugin html --ext .html . | wc -c`
+if [ "$eslinthtml" != "0" ]
+then
+	errEslint=$errEslint" "$eslinthtml
+	toCommit=false
+else
+	errEslint=""
+fi
+if [ $toCommit == true ]
+then
+	exit 0
+else
+	echo "$errToShow $errEslint"
+	exit 1
+fi

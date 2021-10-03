@@ -1,0 +1,12 @@
+#!/bin/bash
+msgCommit=`cat .git/COMMIT_EDITMSG`
+camp1=`echo "$msgCommit" | grep 'MOTIVO DEL COMMIT:' | wc -c`
+camp2=`echo "$msgCommit" | grep 'IMPLEMENTACIÓN:' | wc -c`
+echo "$camp1 $camp2"
+if [ "$camp1" != "0" ] && [ "$camp2" != "0" ]
+then
+	exit 0
+else
+	echo "ERROR: mala sintaxis del msg de commit faltan los campos MOTIVO DEL COMMIT, IMPLEMENTACIÓN o ambos"
+	exit 1
+fi
