@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>Practica Antoni</title>
+    </head>
+    <body>
+        <h1 style="text-align: center">Practica - Antoni Tormo</h1>
+        <ol>
+            <li><a href="#git">Que es git?</a></li>
+            <li><a href="#metodologia">Metodologia</a></li>
+            <li><a href="#dev">Practica</a></li>
+            <li><a href="#u1">User 1</a></li>
+            <li><a href="#u2">User 2</a></li>
+            <li><a href="#u3">User 3</a></li>
+            <li><a href="#u1tagtest">User 1 - Test i tag</a></li>
+            <li><a href="#u1hooks">User 1 - Hooks</a></li>
+        </ol>
+        <h2 id="git" style="text-align: center">Que es git?</h2>
+        <p>Git es un sistema de control de versions, que permet el treball en equip en projectes tant grans com a xicotets,el servidor es sol allotjar en webs com Github o GitLab encara que tambe el pots allotjar en un vps o en local, el projecte es sol dividir en rames que fan posible el treball paral.lel, sol haber una rama "master" on esta la versió actual del projecte i rames de desenvolupament o test (encara que tota la distribució depen de la metodologia que gastem), a aquestes rames els usuaris pujen els canvis que fan al projecte mitjançant commits que son com actualitzacions del projecte, una bona practica dels commits es fer que cada un es faça per a una millora diferent i no mesclar varies millores en un sol commit. Tot aço pot ser primer treballat en local per a una volta pasar al servidor remot fent un push, encara que cal sempre antes de pujar canvis al servidor remot fer un pull per vore si estas al dia i combinar els canvis</p>
+        <h2 id="metodologia" style="text-align: center">Metodologia - GitHub Flow</h2>
+        <p>He gastat esta metodologia per que me pareix la que millor se adequa a un projecte xicotet amb millores sobre un projecte no molt separat per moduls</p>
+        <img style="width: 100%" src="https://i2.wp.com/build5nines.com/wp-content/uploads/2018/01/GitHub-Flow.png">
+        <h2 id="dev" style="text-align: center">Fluxe de treball</h2>
+        <ol>
+            <li id="u1"><p>User 1<br>
+                Primer descarrega la plantilla i la descomprimix en el fitxer on va a crear el repositori git</p>
+                <img src="ft-prac1/ft1.png">
+                <p>Ara cree un repositori buit i faig el commit de la estructura creada , afegixc el repositori remoto i faig el primer push</p>
+                <img src="ft-prac1/ft2.png">
+                <p>I ja per acabar la primera part del usuari 1 crea la estructura de index i la pagina de home i fa el commit i push</p>
+                <img src="ft-prac1/ft3.png">
+            </li>
+            <li id="u2"><p>User 2<br>
+                Primer com a usuari 2 fem un clone del repositori amb "git clone https://github.com/antonitg/PracticaSistemaControlVersiones.git" despres creem una branca nova per a la feature i la desenvolupem
+                </p>
+                <img src="ft-prac1/ft4.png">
+                <p>Una volta afegida la feature fem el push de la branca, fem el merge a la branca de master i fem un push tambe de la branca master</p>
+                <img src="ft-prac1/ft5.png">
+                <p>Ara fem la segona feature seguint els mateixos passos que la primera canvi de branca, commit i pull de la nova feature</p>
+                <img src="ft-prac1/ft6.png">
+                <p>I igual que antes fem el merge a la branca de master i la pujem al repositori remot</p>
+                <img src="ft-prac1/ft7.png">
+            </li>
+            <li id="u3"><p>User 3<br>
+               El usuari 3 copiant el que ha fet el usuari 2 fara un git clone i es creara una branca propia on fer la feature, fer el commit i pujar la rama al repositori remot </p>
+               <img src="ft-prac1/ft8.png">
+               <p>Despres de pujarla solas ha de fer el merge contra la rama master i pujar aquesta tambe al repositori remot</p>
+               <img src="ft-prac1/ft9.png">                
+            </li>
+            <li id="u1tagtest"><p>User 1 - Tag i rama test
+               El usuari 1 fa un pull de la rama master per a trindre la informació actualitzada, despres fa un tag de la versió v1.0 i el puja al servidor, al acabar tambe crea la rama test i la puja al servidor</p>
+                <img src="ft-prac1/ft10.png">
+            </li>
+            <li id="u1hooks"><p>User 1 - Hooks</p>
+               <ul>
+                   <li><p>Hook eslint<br>
+                       El tema de instalar el eslint ha sigut en el que mes temps he estat de la practica al final va i he instalat el eslint cli i el eslint plugin html, he fet el eslint --init i li he dit que volia comprovar i trobar problemes en els fitxers, quan ha creat el fitxer de configuració li he ficat "modules":["html"], he tardat molt en instalar-lo el he borrat i reinstalt moltes vegades tant el eslint ocm eslinter i altres mes no tinc captures de tot el proces (per que estat tant de rato que ja no estava documentant res per que no sabia si funcionaria o no) pero si es pot vorer com funciona i tambe pujare la carpeta de configuració i el package.json al gh</p>
+                   <img src="ft-prac1/ft11.png">
+                   <p>En aquest he gastat el eslint per a vore els errors, si els errors que retorna tenen 0 caracters es que no hi han i seguixc la execucio normal, si en canvi tenen mes de 0 caraacters entonces pare el commit i mostre els errors per pantalla, ho he fet amb el pre-commit i esta junt amb el hook dels caracters especials</p><a href="https://github.com/antonitg/PracticaSistemaControlVersiones/blob/master/gitHooks/pre-commit">Codi</a>
+                   </li>
+                   <li><p>Hook caracters especials<br>
+                      En aquest he fet dos bucles for anidats, en un recorrec tots els fitxers que van a ser afegits en el commit i en el altre comprova tots els caractes especials, si troba algun caracter esepecial ho afegix a la llista de errors i no deixa fer el commit, al final de tot mostra tots els caracters especials que hi han i en quin fitxer estan, ho he fet amb el pre commit i esta junt amb el hook del eslint </p><a href="https://github.com/antonitg/PracticaSistemaControlVersiones/blob/master/gitHooks/pre-commit">Codi</a>
+                   </li>
+                   <li><p>Hook Missatge<br>
+                       Este hook es el mes senzill de tots simplement mire que el missatge tinga els dos camps que demana i si algun dels dos no esta mostre un error i pare el commit, el he fet en msg-commit</p><a href="https://github.com/antonitg/PracticaSistemaControlVersiones/blob/master/gitHooks/msg-commit">Codi</a>
+                   </li>
+                   <li><p>Hook node_modules<br>
+                   Este hook tambe es molt senzill sols fa falta borrar la carpeta node_modules i fer un npm install, ho he fet amb un post-checkout</p><a href="https://github.com/antonitg/PracticaSistemaControlVersiones/blob/master/gitHooks/post-checkout">Codi</a>
+                   </li>
+               </ul>
+                <p>Una volta he fet els hooks els he provat i al funcionar els he ficat a la carpeta gitHooks i he fet un push</p>
+                <img src="ft-prac1/ft12.png">
+            </li>
+        </ol>
+    </body>
+</html>
